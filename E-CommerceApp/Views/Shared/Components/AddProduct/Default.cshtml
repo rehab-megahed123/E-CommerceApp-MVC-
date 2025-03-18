@@ -1,0 +1,60 @@
+﻿@using E_CommerceApp.ViewModel
+@model AddProductVM
+   <div class="container">
+      <div class="row">
+         <div class="col-md-12">
+            <div class="heading">
+               <h2>Add New Product</h2>
+            </div>
+         </div>
+      </div>
+      <div class="row mb-40">
+         <div class="col-md-6 text-center mb-5 mb-lg-0">
+            <form action="/Product/SaveAddProduct" method="POST" enctype="multipart/form-data">
+               <!-- Product Name -->
+               <div class="form-group">
+                    <label asp-for="Name">Product Name</label>
+                   <input  asp-for="Name"  class="form-control"  placeholder="Enter product name" required>
+               </div>
+
+               <!-- Description -->
+               <div class="form-group">
+                  <label for="description">Description</label>
+                    <textarea class="form-control" asp-for="Description " rows="4" placeholder="Enter product description" required></textarea>
+               </div>
+
+               <!-- Price -->
+               <div class="form-group">
+                  <label for="price">Price</label>
+                    <input class="form-control" asp-for="Price" placeholder="Enter price" required>
+               </div>
+
+               <!-- Upload Image -->
+               <div class="form-group">
+                  <label for="uploadImage">Upload Image</label>
+                    <input value="@Model.formFile" type="file" name="formFile"  class="form-control" id="inputImage">
+               </div>
+
+               <!-- Category Dropdown -->
+               <div class="form-group">
+                  <label for="category">Category</label>
+                    <select class="form-control" asp-for="CategoryId" asp-items="@Model.CategoryOptions" required>
+                        
+                     <option value="0">Select Category</option>
+                     <option value="1">Smart Watches</option>
+
+                     <!-- You can add more options as needed -->
+                  </select>
+               </div>
+
+               <!-- Submit Button -->
+               <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+         </div>
+         <div class="col-md-6 text-center mb-5 mb-lg-0">
+            <img class="img-fluid" src="~/images/showcase/showcase-4.png" alt="Add Product Image">
+         </div>
+      </div>
+   </div>
+
+

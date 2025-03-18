@@ -1,0 +1,180 @@
+﻿@using E_CommerceApp.ViewModel
+@model RegisterViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register • E-Commerce</title>
+    <link rel="stylesheet" href="~/css/custom.css">
+
+    <style>
+        /* Global Style */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #b18161, #c68151, #fce1a1); /* ألوان أخف كما في login */
+        }
+
+        /* Form Wrapper */
+        .wrapper {
+            width: 380px;
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            font-size: 32px;
+            color: #f9a743; /* نفس اللون */
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Input Field */
+        .input-field {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+            .input-field label {
+                display: block;
+                font-size: 14px;
+                color: #f9a743; /* اللون الفاتح */
+                margin-bottom: 8px;
+                font-weight: 500;
+            }
+
+            .input-field input, .input-field select {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #f9d69e; /* حدود أفتح */
+                border-radius: 8px;
+                background: #fff9e5; /* خلفية فاتحة */
+                outline: none;
+                font-size: 14px;
+                transition: border 0.3s ease;
+            }
+
+                .input-field input:focus, .input-field select:focus {
+                    border-color: #f9a743; /* التركيز بلون أفتح */
+                }
+
+        /* Submit Button */
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #f9a743, #fbd46d); /* تدرج ألوان أخف */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+            button:hover {
+                background: linear-gradient(90deg, #b18161, #fce1a1); /* تدرج أخف عند التفاعل */
+            }
+
+        /* Divider */
+        .divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+            color: #f9a743; /* لون أفتح */
+            font-size: 14px;
+        }
+
+            .divider::before, .divider::after {
+                content: "";
+                flex: 1;
+                height: 1px;
+                background: #f9d69e; /* الحدود أفتح */
+                margin: 0 10px;
+            }
+
+        /* Register Link */
+        .register {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #f9a743; /* نفس اللون الفاتح */
+        }
+
+            .register a {
+                color: #f9d69e; /* رابط بلون أفتح */
+                text-decoration: none;
+                font-weight: bold;
+            }
+
+                .register a:hover {
+                    text-decoration: underline;
+                }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <form action="SaveRegister" method="post">
+
+            <h2>Join Us Today!</h2>
+
+            <div class="input-field">
+                <label asp-for="Role">Register As:</label>
+                <select asp-for="Role" id="Role">
+                    <option value="Customer">Customer</option>
+                    <option value="Seller">Seller</option>
+                </select>
+            </div>
+
+            <div class="input-field">
+                <label>Full Name</label>
+                <input asp-for="FullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="input-field">
+                <label>Email Address</label>
+                <input asp-for="email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="input-field">
+                <label>Password</label>
+                <input asp-for="Password" type="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="input-field">
+                <label>Confirm Password</label>
+                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm your password" required>
+            </div>
+
+            <button type="submit">Register Now</button>
+
+            <div class="divider">OR</div>
+
+            <div class="register">
+                <p>Already have an account? <a href="Login">Log in</a></p>
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>

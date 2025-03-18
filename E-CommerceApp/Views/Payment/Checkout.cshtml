@@ -1,0 +1,80 @@
+﻿@using E_CommerceApp.ViewModel
+@model CheckoutViewModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<div class="checkout-container">
+    <h2>Checkout</h2>
+
+    <p class="total-amount">Total Amount: <span>$@(Model.Amount / 100)</span></p>
+
+    <form method="post" asp-action="ProcessPayment">
+        <div class="button-group">
+            <button type="submit" class="btn btn-success">Proceed to Payment</button>
+            <a href="/Order/NotNow" class="btn btn-secondary">Not Now</a>
+        </div>
+    </form>
+</div>
+
+<style>
+    .checkout-container {
+        max-width: 500px;
+        margin: 50px auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    h2 {
+        color: #232f3e;
+        font-size: 26px;
+        margin-bottom: 20px;
+    }
+
+    .total-amount {
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+        .total-amount span {
+            color: #e74c3c;
+        }
+
+    .button-group {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+</style>

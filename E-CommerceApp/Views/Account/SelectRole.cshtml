@@ -1,0 +1,36 @@
+﻿@using E_CommerceApp.ViewModel
+@model SelectRoleVM
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Role for Registration</title>
+  <link rel="stylesheet" href="~/css/style.css">
+</head>
+
+<body>
+  <div class="wrapper">
+    <form action="Register" method="post">
+      <h2>Register</h2>
+      
+      <div class="input-field">
+        <label>You Want To Register As:</label>
+      </div>
+
+      <div class="input-field">
+        <label asp-for="Role">Choose a Role:</label>
+        <select asp-for="Role" id="Role" class="form-control" >
+            <option  value="Customer">Customer</option>
+            <option  value="Seller">Seller</option>
+        </select>
+      </div>
+
+      <button type="submit">Continue</button>
+    </form>
+  </div>
+</body>
+
+</html>

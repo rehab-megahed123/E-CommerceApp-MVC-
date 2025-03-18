@@ -1,0 +1,32 @@
+﻿@using E_CommerceApp.ViewModel
+@model SearchResultViewModel
+@{
+    Layout = "AllLayout";
+}
+
+
+<div class="container mt-5">
+    <form asp-action="Index" method="post" class="row mb-4 p-3 bg-light rounded shadow-sm">
+        <div class="col-md-5 mb-3">
+            <label for="searchTerm" class="form-label">Search by Product Name</label>
+            <input type="text" asp-for="SearchItem" class="form-control" placeholder="Search..." /> 
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="CategoryId" class="form-label">Category</label>
+            <select id="CategoryId" name="CategoryId" class="form-select">
+                <option value="0">All Categories</option>
+                @foreach (var category in Model.CategoryList)
+                {
+                    <option value="@category.CategoryId">
+                        @category.Name
+                    </option>
+                }
+            </select>
+        </div>
+        <div class="col-md-3 mb-3">
+            <button type="submit" class="btn btn-primary w-100 py-2">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </div>
+    </form>
+</div>

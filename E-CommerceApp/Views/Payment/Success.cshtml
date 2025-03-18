@@ -1,0 +1,80 @@
+﻿@model E_commerce.DAl.Model.Order
+
+<div class="container mt-5">
+    <div class="card shadow-lg p-4 border-0">
+        <h2 class="text-center mb-4 text-primary font-weight-bold">Order Confirmation</h2>
+
+        <div class="order-details mb-4 p-3 bg-light rounded">
+            <p><strong>🆔 Order ID:</strong> <span class="text-dark">@Model.OrderId</span></p>
+            <p><strong>💰 Total Amount:</strong> <span class="text-success">@Model.TotalAmount.ToString("C")</span></p>
+        </div>
+
+        <h3 class="mb-3 text-secondary font-weight-bold">🛒 Items in your order:</h3>
+        <div class="table-responsive">
+            <table class="table table-hover text-center border rounded">
+                <thead class="bg-primary text-white">
+                    <tr>
+                        <th>📦 Product Name</th>
+                        <th>🔢 Quantity</th>
+                        <th>💲 Price</th>
+                    </tr>
+                </thead>
+                <tbody class="bg-light">
+                    @foreach (var item in Model.OrderItems)
+                    {
+                        <tr>
+                            <td class="text-dark">@item.ProductName</td>
+                            <td class="text-dark">@item.Quantity</td>
+                            <td class="text-success font-weight-bold">@item.Price.ToString("C")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Back Button -->
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Screen", "Screen")" class="btn btn-lg btn-outline-primary shadow">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* تحسين التصميم بشكل أكثر جاذبية */
+    .container {
+        max-width: 75%;
+        margin: auto;
+    }
+
+    .card {
+        background: #fdfdfd;
+        border-radius: 12px;
+        box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+
+    .table th, .table td {
+        vertical-align: middle;
+        font-size: 17px;
+        padding: 15px;
+    }
+
+    .table thead {
+        border-radius: 8px;
+    }
+
+    .btn-lg {
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+
+        .btn-lg:hover {
+            background: #007bff;
+            color: white !important;
+            transform: scale(1.05);
+        }
+</style>

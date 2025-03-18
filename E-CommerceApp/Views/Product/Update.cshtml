@@ -1,0 +1,78 @@
+﻿@using E_CommerceApp.ViewModel
+@model AddProductVM
+<html>
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid&#43;Serif:400%7cJosefin&#43;Sans:300,400,600,700 ">
+    <link rel="stylesheet" href="~/plugins/bootstrap/bootstrap.min.css ">
+    <link rel="stylesheet" href="~/plugins/themefisher-font/themefisher-font.min.css ">
+    <link rel="stylesheet" href="~/plugins/slick/slick.min.css ">
+
+    <!-- Stylesheets -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
+</head>
+    
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="heading">
+                <h2>Update Product</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-40">
+        <div class="col-md-6 text-center mb-5 mb-lg-0">
+            <form action="/Product/SaveUpdateProduct" method="POST" enctype="multipart/form-data">
+                 <input hidden asp-for="ProductId" />
+                <!-- Product Name -->
+                <div class="form-group">
+                    <label asp-for="Name" >Product Name</label>
+                    <input asp-for="Name"  value="@Model.Name" class="form-control"  required>
+                </div>
+
+                <!-- Description -->
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" asp-for="Description " rows="4" placeholder="Enter product description" required></textarea>
+                </div>
+
+                <!-- Price -->
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input class="form-control" asp-for="Price" placeholder="Enter price" required>
+                </div>
+
+                <!-- Upload Image -->
+                <div class="form-group">
+                    <label for="uploadImage">Upload Image</label>
+                    <input value="@Model.formFile" type="file" name="formFile" class="form-control" id="inputImage">
+                </div>
+
+                <!-- Category Dropdown -->
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select class="form-control" asp-for="CategoryId" asp-items="@Model.CategoryOptions" required>
+
+                        <option value="0">Select Category</option>
+                        <option value="1">Smart Watches</option>
+
+                        <!-- You can add more options as needed -->
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+        </div>
+        <div class="col-md-6 text-center mb-5 mb-lg-0">
+            <img class="img-fluid" src="~/images/showcase/showcase-4.png" alt="Add Product Image">
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

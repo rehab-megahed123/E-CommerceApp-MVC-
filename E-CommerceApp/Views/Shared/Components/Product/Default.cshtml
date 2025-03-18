@@ -1,0 +1,43 @@
+﻿@using E_commerce.DAl.Model
+@model List<Product>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center mb-5">
+            <h1 class="font-weight-bold">All latest Smart Watch</h1>
+        </div>
+        @for (int i = 0; i < @Model.Count; i++)
+        {
+
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="block">
+                    <div class="gallery-overlay">
+                        <a href="/Product/Details/@Model[i].ProductId" class="gallery-popup">
+                            <i class="tf-ion-plus-round"></i>
+                        </a>
+                    </div>
+                    <img class="img-fluid" src="@Model[i].ImageUrl" alt="Apple Watch">
+                </div>
+                <div class="product-info">
+                    <h4 class="mb-2"><a href="/Product/Details/@Model[i].ProductId" class="link-title">@Model[i].Name</a></h4>
+                    <p class="price">$@Model[i].Price
+                        <s class="price">$@Model[i].Price+5</s>
+                    </p>
+                </div>
+            </div>
+        }
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+    </div>
+  </div>
