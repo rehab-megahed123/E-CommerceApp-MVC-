@@ -1,5 +1,5 @@
 ﻿@using E_CommerceApp.ViewModel
-@model RegisterViewModel
+@model UserProfileVM
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,11 +7,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register • E-Commerce</title>
-    <link rel="stylesheet" href="~/css/custom.css">
+    <title>Profile • E-Commerce</title>
 
+    <!-- إضافة CSS -->
     <style>
-        /* Global Style */
+        /* Reset & Global Styles */
         * {
             margin: 0;
             padding: 0;
@@ -24,7 +24,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: linear-gradient(135deg, #b18161, #c68151, #fce1a1); /* ألوان أخف كما في login */
+            background: linear-gradient(135deg, #b18161, #c68151, #fce1a1); /* ألوان أخف */
         }
 
         /* Form Wrapper */
@@ -40,7 +40,7 @@
 
         h2 {
             font-size: 32px;
-            color: #f9a743; /* نفس اللون */
+            color: #f9a743; /* لون أفتح */
             margin-bottom: 30px;
             font-weight: bold;
         }
@@ -59,7 +59,7 @@
                 font-weight: 500;
             }
 
-            .input-field input, .input-field select {
+            .input-field input {
                 width: 100%;
                 padding: 12px;
                 border: 1px solid #f9d69e; /* حدود أفتح */
@@ -70,28 +70,9 @@
                 transition: border 0.3s ease;
             }
 
-                .input-field input:focus, .input-field select:focus {
+                .input-field input:focus {
                     border-color: #f9a743; /* التركيز بلون أفتح */
                 }
-
-        /* Submit Button */
-        button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
-            background: linear-gradient(90deg, #f9a743, #fbd46d); /* تدرج ألوان أخف */
-            color: white;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background 0.3s ease;
-            font-weight: bold;
-        }
-
-            button:hover {
-                background: linear-gradient(90deg, #b18161, #fce1a1); /* تدرج أخف عند التفاعل */
-            }
 
         /* Divider */
         .divider {
@@ -111,11 +92,30 @@
                 margin: 0 10px;
             }
 
+        /* Edit Button */
+        .edit-btn {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            background: linear-gradient(90deg, #f9a743, #fbd46d); /* تدرج ألوان أخف */
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-weight: bold;
+        }
+
+            .edit-btn:hover {
+                background: linear-gradient(90deg, #b18161, #fce1a1); /* تدرج أخف عند التفاعل */
+            }
+
         /* Register Link */
         .register {
             margin-top: 20px;
             font-size: 14px;
-            color: #f9a743; /* نفس اللون الفاتح */
+            color: #f9a743; /* اللون الفاتح */
         }
 
             .register a {
@@ -127,52 +127,35 @@
                 .register a:hover {
                     text-decoration: underline;
                 }
-
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <form action="SaveRegister" method="post">
+        <form method="post">
 
-            <h2>Join Us Today!</h2>
+            <!-- عنوان الصفحة -->
+            <h2>@Model.userNmae's Profile</h2>
 
+            <!-- حقل اسم المستخدم -->
             <div class="input-field">
-                <label asp-for="Role">Register As:</label>
-                <select asp-for="Role" id="Role">
-                    <option value="Customer">Customer</option>
-                    <option value="Seller">Seller</option>
-                </select>
+                <label>Username</label>
+                <input type="text" value="@Model.userNmae" disabled />
             </div>
 
-            <div class="input-field">
-                <label>User Name</label>
-                <input asp-for="FullName" placeholder="User Name" required>
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-
+            <!-- حقل البريد الإلكتروني -->
             <div class="input-field">
                 <label>Email Address</label>
-                <input asp-for="email" placeholder="Enter your email" required>
+                <input type="email" value="@Model.Email" disabled />
             </div>
 
-            <div class="input-field">
-                <label>Password</label>
-                <input asp-for="Password" type="password" placeholder="Enter your password" required>
-            </div>
+            <!-- زر تعديل البيانات -->
+            <a href="/Home/Index" class="edit-btn">Log Out</a>
 
-            <div class="input-field">
-                <label>Confirm Password</label>
-                <input asp-for="ConfirmPassword" type="password" placeholder="Confirm your password" required>
-            </div>
+            <!-- فاصل -->
+            
 
-            <button type="submit">Register Now</button>
-
-            <div class="divider">OR</div>
-
-            <div class="register">
-                <p>Already have an account? <a href="Login">Log in</a></p>
-            </div>
+           
 
         </form>
     </div>

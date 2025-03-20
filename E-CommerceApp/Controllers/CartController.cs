@@ -2,6 +2,7 @@
 using E_Commerce.Bll.Manager.Abstraction;
 using E_CommerceApp.Models;
 using E_CommerceApp.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_CommerceApp.Controllers
@@ -13,6 +14,7 @@ namespace E_CommerceApp.Controllers
         {
             ProductManager = productManager;
         }
+        [Authorize(Roles = "Customer")]
         [HttpPost]
         public IActionResult AddToCart(int productId, string productName, decimal price)
         {
@@ -46,6 +48,7 @@ namespace E_CommerceApp.Controllers
             var cart = HttpContext.Session.GetObjectFromJson<List<CartItem>>("Cart") ?? new List<CartItem>();
             return View(cart);
         }
+        [Authorize(Roles = "Customer")]
         public IActionResult ClearCart()
         {
             HttpContext.Session.Remove("Cart");

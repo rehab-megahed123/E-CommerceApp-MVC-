@@ -4,6 +4,7 @@ using E_commerce.DAl.Repository.Implementation;
 using E_Commerce.Bll.Manager.Abstraction;
 using E_Commerce.Bll.Manager.Implementation;
 using E_CommerceApp.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_CommerceApp.Controllers
@@ -19,7 +20,7 @@ namespace E_CommerceApp.Controllers
             this.unitOfWork = unitOfWork;
             this.ProductManager = ProductManager;
         }
-
+        
         public async Task<IActionResult> SearchPage( string searchTerm)
         {
             
@@ -31,6 +32,7 @@ namespace E_CommerceApp.Controllers
             };
             return View("SearchPage", search);
         }
+        
         [HttpPost]
         public async Task< IActionResult> Index(SearchResultViewModel search)
         {

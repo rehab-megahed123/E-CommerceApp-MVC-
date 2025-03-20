@@ -11,91 +11,101 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
         }
 
         .product-container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
+        max-width: 900px;
+        margin: 40px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
         }
 
         .product-image {
-            max-width: 80%; /* تصغير حجم الصورة ولكن بدون تمددها */
-            height: auto; /* الحفاظ على نسبة الأبعاد الأصلية */
-            object-fit: contain; /* ضمان عدم قص أي جزء من الصورة */
-            border-radius: 8px;
-            margin-bottom: 15px;
+        max-width: 100%; /* Make image responsive */
+        height: auto;
+        object-fit: contain;
+        border-radius: 8px;
+        margin-bottom: 15px;
         }
 
         .price {
-            font-size: 1.5rem;
-            color: #28a745;
-            font-weight: bold;
-            margin: 10px 0;
+        font-size: 1.5rem;
+        color: #28a745;
+        font-weight: bold;
+        margin: 10px 0;
         }
 
         .description {
-            font-size: 1rem;
-            color: #555;
-            line-height: 1.5;
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.5;
         }
 
         .btn-buy {
-            background: #ff6600;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            border: none;
-            font-size: 1rem;
-            transition: 0.3s;
+        background: #ff6600;
+        color: white;
+        padding: 10px 15px;
+        border-radius: 5px;
+        border: none;
+        font-size: 1rem;
+        transition: 0.3s;
         }
 
-            .btn-buy:hover {
-                background: #e65c00;
-            }
+        .btn-buy:hover {
+        background: #e65c00;
+        }
 
         .update-btn, .delete-btn {
-            background: none;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
+        background: none;
+        border: none;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: 0.3s;
         }
 
         .update-btn {
-            color: #007bff;
+        color: #007bff;
         }
 
         .delete-btn {
-            color: #dc3545;
+        color: #dc3545;
         }
 
         .update-btn:hover {
-            color: #0056b3;
+        color: #0056b3;
         }
 
         .delete-btn:hover {
-            color: #a71d2a;
+        color: #a71d2a;
         }
 
         .back-btn {
-            display: block;
-            margin-top: 20px;
-            color: #333;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+        display: block;
+        margin-top: 20px;
+        color: #333;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s;
         }
 
-            .back-btn:hover {
-                color: #555;
-            }
+        .back-btn:hover {
+        color: #555;
+        }
+
+        /* media (max-width: 576px) { */
+        /*     .product-container */
+
+        /* { */
+        /*     padding: 15px; */
+        /*     margin: 20px; */
+        /* } */
+
+        }
     </style>
 </head>
 <body>
@@ -104,20 +114,29 @@
 
         <!-- Update & Delete Buttons -->
         <div class="d-flex justify-content-between">
-            <form asp-action="Update" asp-controller="Product" method="post">
-                <input type="hidden" asp-for="ProductId" />
-                <button type="submit" class="update-btn">
-                    <i class="fas fa-edit"></i> Edit Product
-                </button>
-            </form>
+            @if (User.IsInRole("Admin") || User.IsInRole("Seller"))
+            {
+                <form asp-action="Update" asp-controller="Product" method="post">
+                    <input type="hidden" asp-for="ProductId" />
+                    <input type="hidden" asp-for="Name" />
+                    <input type="hidden" asp-for="Description" />
+                    <input type="hidden" asp-for="Price" />
+                    <input type="hidden" asp-for="ImageUrl" />
+                    <input type="hidden" asp-for="CategoryId" />
+                    <button type="submit" class="update-btn">
+                        <i class="fas fa-edit"></i> Edit Product
+                    </button>
+                </form>
 
-            <form asp-action="Delete" asp-controller="Product" method="post">
-                <input type="hidden" asp-for="ProductId" />
-                <button type="submit" class="delete-btn">
-                    <i class="fas fa-trash-alt"></i> Delete Product
-                </button>
-            </form>
+                <form asp-action="Delete" asp-controller="Product" method="post">
+                    <input type="hidden" asp-for="ProductId" />
+                    <button type="submit" class="delete-btn">
+                        <i class="fas fa-trash-alt"></i> Delete Product
+                    </button>
+                </form>
+            }
         </div>
+        
 
         <!-- Product Details -->
         <h1>@Model.Name</h1>
@@ -125,16 +144,16 @@
         <img src="@Model.ImageUrl" alt="Product Image" class="product-image">
 
         <div class="price">@Model.Price.ToString("C")</div>
-
+         @if (User.IsInRole("Customer")) {
         <form asp-controller="Cart" asp-action="AddToCart" method="post">
-              <input type="hidden" name="productId" value="@Model.ProductId" />
+            <input type="hidden" name="productId" value="@Model.ProductId" />
             <input type="hidden" name="productName" value="@Model.Name" />
             <input type="hidden" name="price" value="@Model.Price" />
             <button type="submit" class="btn-buy">
                 <i class="fas fa-shopping-cart"></i> Add to Cart
             </button>
         </form>
-
+         }
         <div class="product-info">
             <h3>Description</h3>
             <p class="description">@Model.Description</p>

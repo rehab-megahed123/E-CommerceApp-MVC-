@@ -1,16 +1,12 @@
 ﻿@using E_commerce.DAl.Model
 @model List<Product>
-@{
-    Layout = "AllLayout";
-}
-
 
 <div class="container mt-5">
     <div class="row">
         @foreach (var product in Model)
         {
             <div class="col-md-4 mb-4">
-                <div class="card" style="width: 18rem;">
+                <div class="card product-card">
                     @if (!string.IsNullOrEmpty(product.ImageUrl))
                     {
                         <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name">
@@ -26,13 +22,13 @@
                         <p class="card-text">
                             <strong>Price:</strong> @product.Price.ToString("C")
                         </p>
-                        @if (product.Price!=0)
+                        @if (product.Price != 0)
                         {
                             <p class="card-text">
                                 <strong>Salary:</strong> @product.Price.ToString("C")
                             </p>
                         }
-                        <a href="@Url.Action("Details", "Product", new { id = product.ProductId})" class="btn btn-primary">View Details</a>
+                        <a href="@Url.Action("Details", "Product", new { id = product.ProductId})" class="btn btn-primary product-btn">View Details</a>
                     </div>
                 </div>
             </div>
@@ -40,4 +36,78 @@
     </div>
 </div>
 
+<style>
+    /* Container for products */
+    .container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
 
+    /* Card style */
+    .product-card {
+        width: 100%;
+        max-width: 350px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        margin: 15px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Card image */
+    .card-img-top {
+        width: 100%;
+        height: auto;
+        transition: opacity 0.3s ease;
+    }
+
+    /* Card body */
+    .card-body {
+        background-color: #fef6e4;
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Product title */
+    .card-title {
+        font-size: 22px;
+        font-weight: bold;
+        color: #f9a743;
+        margin-bottom: 15px;
+    }
+
+    /* Product description */
+    .card-text {
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 15px;
+    }
+
+        /* Price style */
+        .card-text strong {
+            color: #f9a743;
+        }
+
+    /* Button style */
+    .product-btn {
+        background: linear-gradient(90deg, #f9a743, #fbd46d);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+        .product-btn:hover {
+            background: linear-gradient(90deg, #b18161, #fce1a1);
+            transform: scale(1.05);
+        }
+</style>

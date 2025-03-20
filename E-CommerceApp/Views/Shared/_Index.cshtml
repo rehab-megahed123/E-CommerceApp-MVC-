@@ -1,91 +1,107 @@
 ﻿<!DOCTYPE html>
 
 <!--
- // WEBSITE: https://themefisher.com
- // TWITTER: https://twitter.com/themefisher
- // FACEBOOK: https://www.facebook.com/themefisher
- // GITHUB: https://github.com/themefisher/
+// WEBSITE: https://themefisher.com
+// TWITTER: https://twitter.com/themefisher
+// FACEBOOK: https://www.facebook.com/themefisher
+// GITHUB: https://github.com/themefisher/
 -->
 
 <html lang="en">
 <head>
-    
-  <!-- ** Basic Page Needs ** -->
-  <meta charset="utf-8">
-  <title>Vex - Product Landing Page Boostarp Template</title>
 
-  <!-- ** Mobile Specific Metas ** -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="Vex HTML Template">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <meta name="author" content="Themefisher">
-  <meta name="generator" content="Themefisher Vex HTML Template v1.0">
+    <!-- ** Basic Page Needs ** -->
+    <meta charset="utf-8">
+    <title>Vex - Product Landing Page Boostarp Template</title>
 
-  <!-- theme meta -->
-  <meta name="theme-name" content="vex" />
+    <!-- ** Mobile Specific Metas ** -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Vex HTML Template">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="author" content="Themefisher">
+    <meta name="generator" content="Themefisher Vex HTML Template v1.0">
 
-  <!-- ** Plugins Needed for the Project ** -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid&#43;Serif:400%7cJosefin&#43;Sans:300,400,600,700 ">
-  <link rel="stylesheet" href="~/plugins/bootstrap/bootstrap.min.css ">
-  <link rel="stylesheet" href="~/plugins/themefisher-font/themefisher-font.min.css ">
-  <link rel="stylesheet" href="~/plugins/slick/slick.min.css ">
+    <!-- theme meta -->
+    <meta name="theme-name" content="vex" />
 
-  <!-- Stylesheets -->
-  <link href="~/css/style.css" rel="stylesheet">
+    <!-- ** Plugins Needed for the Project ** -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid&#43;Serif:400%7cJosefin&#43;Sans:300,400,600,700 ">
+    <link rel="stylesheet" href="~/plugins/bootstrap/bootstrap.min.css ">
+    <link rel="stylesheet" href="~/plugins/themefisher-font/themefisher-font.min.css ">
+    <link rel="stylesheet" href="~/plugins/slick/slick.min.css ">
 
-  <!--Favicon-->
-  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+    <!-- Stylesheets -->
+    <link href="~/css/style.css" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="icon" href="images/favicon.png" type="image/x-icon">
 
 </head><body id="body">
 
-<!-- preloader start -->
-<div class="preloader"></div>
-<!-- preloader end -->
+    <!-- preloader start -->
+    <div class="preloader"></div>
+    <!-- preloader end -->
 
 
-<header class="navigation sticky-top bg-white">
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light">
-      <a class="navbar-brand" href="index.html"> <img src="~/images/logo.png" alt="Vex" width="100px">
-      </a>
-      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse" data-target="#navigation"
-        aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <header class="navigation sticky-top bg-white">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a class="navbar-brand" href="index.html"> <img src="~/images/logo.png" alt="Vex" width="100px">
+                </a>
+                <button class="navbar-toggler p-0 border-0" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-      <div class="collapse navbar-collapse text-center" id="navigation">
-        <ul class="navbar-nav ml-auto mr-n0 mr-md-n3">
+                <div class="collapse navbar-collapse text-center" id="navigation">
+                    <ul class="navbar-nav ml-auto mr-n0 mr-md-n3">
 
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
-          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Screen/Screen">Home</a>
+                        </li>
 
-          <li class="nav-item">
-            <a class="nav-link" href="#products">Products</a>
-          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#products">Products</a>
+                        </li>
+                         @if (User.IsInRole("Customer")){
                         <li class="nav-item">
                             <a class="nav-link" href="/Order/ShowAll">Orders</a>
                         </li>
-                       
-
-          <li class="nav-item">
-
-            <a class="nav-link" href="#AddProduct">Add Product</a>
-          </li>
+                         }
+                          @if ((User.IsInRole("Seller")) || (User.IsInRole("Admin")))
+                          {
                         <li class="nav-item">
-
-                            <a class="nav-link" href="#AddCategory">Add Categort</a>
+                            <a class="nav-link" href="/Order/Show">Orders</a>
                         </li>
+                         }
+
+                        @if ((User.IsInRole("Seller")) || (User.IsInRole("Admin"))){
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="#AddProduct">Add Product</a>
+                            </li>
+                        }
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="/Role/AddRole">Add Role</a>
+                            </li>
+                            <li class="nav-item">
+
+                                <a class="nav-link" href="#AddCategory">Add Category</a>
+                            </li>
+                        }
 
                         <li class="nav-item search-container">
                             <a class="nav-link search-icon" href="#" id="searchToggle">
                                 Search<!-- أيقونة البحث -->
                             </a>
-                            
+
                             <div class="search-box" id="searchBox">
                                 <form method="post" action="/Search/SearchPage">
                                     <input name="searchTerm" type="text" placeholder="Search..." id="searchInput">
-                                <button type="submit">Search</button>
+                                    <button type="submit">Search</button>
                                 </form>
                             </div>
                         </li>
@@ -94,55 +110,55 @@
                         <style>
                             /* تنسيق حاوية البحث */
                             .search-container {
-                                position: relative;
+                            position: relative;
                             }
 
                             /* إخفاء مربع البحث افتراضيًا */
                             .search-box {
-                                position: absolute;
-                                top: 100%;
-                                right: 0;
-                                display: flex;
-                                align-items: center;
-                                background: white;
-                                border: 1px solid #82c4e9;
-                                border-radius: 8px;
-                                overflow: hidden;
-                                opacity: 0;
-                                transform: translateY(-10px);
-                                pointer-events: none; /* منع التفاعل عندما يكون مخفي */
-                                transition: opacity 0.5s ease, transform 0.5s ease;
+                            position: absolute;
+                            top: 100%;
+                            right: 0;
+                            display: flex;
+                            align-items: center;
+                            background: white;
+                            border: 1px solid #82c4e9;
+                            border-radius: 8px;
+                            overflow: hidden;
+                            opacity: 0;
+                            transform: translateY(-10px);
+                            pointer-events: none; /* منع التفاعل عندما يكون مخفي */
+                            transition: opacity 0.5s ease, transform 0.5s ease;
                             }
 
-                                /* إظهار مربع البحث عند التفعيل */
-                                .search-box.active {
-                                    opacity: 1;
-                                    transform: translateY(0);
-                                    pointer-events: auto; /* السماح بالتفاعل */
-                                }
+                            /* إظهار مربع البحث عند التفعيل */
+                            .search-box.active {
+                            opacity: 1;
+                            transform: translateY(0);
+                            pointer-events: auto; /* السماح بالتفاعل */
+                            }
 
-                                /* تنسيق حقل الإدخال */
-                                .search-box input {
-                                    padding: 8px 12px;
-                                    border: none;
-                                    outline: none;
-                                    width: 180px;
-                                    font-size: 14px;
-                                }
+                            /* تنسيق حقل الإدخال */
+                            .search-box input {
+                            padding: 8px 12px;
+                            border: none;
+                            outline: none;
+                            width: 180px;
+                            font-size: 14px;
+                            }
 
-                                /* تنسيق زر البحث */
-                                .search-box button {
-                                    background: #82c4e9;
-                                    border: none;
-                                    padding: 8px;
-                                    cursor: pointer;
-                                    border-left: 1px solid #70b0e6;
-                                }
+                            /* تنسيق زر البحث */
+                            .search-box button {
+                            background: #82c4e9;
+                            border: none;
+                            padding: 8px;
+                            cursor: pointer;
+                            border-left: 1px solid #70b0e6;
+                            }
 
-                                    /* تأثير hover على زر البحث */
-                                    .search-box button:hover {
-                                        background: #5a9bd3;
-                                    }
+                            /* تأثير hover على زر البحث */
+                            .search-box button:hover {
+                            background: #5a9bd3;
+                            }
                         </style>
 
                         <!-- إضافة JavaScript -->
@@ -153,56 +169,30 @@
 
                             // عند الضغط على أيقونة البحث
                             searchToggle.addEventListener('click', function (e) {
-                              e.preventDefault(); // منع التنقل الافتراضي
-                              searchBox.classList.toggle('active'); // تبديل حالة الأنيميشن
+                            e.preventDefault(); // منع التنقل الافتراضي
+                            searchBox.classList.toggle('active'); // تبديل حالة الأنيميشن
                             });
 
                             // إخفاء مربع البحث عند الضغط خارجه
                             document.addEventListener('click', function (e) {
-                              if (!searchBox.contains(e.target) && e.target !== searchToggle) {
-                                searchBox.classList.remove('active');
-                              }
+                            if (!searchBox.contains(e.target) && e.target !== searchToggle) {
+                            searchBox.classList.remove('active');
+                            }
                             });
                         </script>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/Cart/Index">Cart</a>
-                        </li>
+                       
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Cart/Index">Cart</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Profile/Profile">Profile</a>
+                            </li>
+                        
+                        
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#!" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages <i class="tf-ion-chevron-down"></i></a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown03">
-              <li><a class="dropdown-item" href="blog-details.html">Blog Details</a></li>
-              <li><a class="dropdown-item" href="product-details.html">Product Details</a></li>
-              <li><a class="dropdown-item" href="privacy-policy.html">Privacy Policy</a></li>
-              <li><a class="dropdown-item" href="terms-conditions.html">Terms Conditions</a></li>
+              
 
-              <li class="dropdown dropdown-submenu dropright">
-                <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu 01</a>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdown0301">
-                  <li><a class="dropdown-item" href="index.html">Submenu 11</a></li>
-                  <li><a class="dropdown-item" href="index.html">Submenu 12</a></li>
-                </ul>
-              </li>
-
-              <li class="dropdown dropdown-submenu dropleft">
-                <a class="dropdown-item dropdown-toggle" href="#!" id="dropdown0301" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sub Menu 02</a>
-
-                <ul class="dropdown-menu" aria-labelledby="dropdown0301">
-                  <li><a class="dropdown-item" href="index.html">Submenu 21</a></li>
-                  <li><a class="dropdown-item" href="index.html">Submenu 22</a></li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="index.html#testimonial">Review</a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
-          </li>
+         
 
         </ul>
 
@@ -347,15 +337,19 @@
 
 @await Component.InvokeAsync("Product")
 </section>
+    @if ((User.IsInRole("Seller")) || (User.IsInRole("Admin")))
+    {
 
 <section class="feature-list section" id="AddProduct">
  @await Component.InvokeAsync("AddProduct")
  </section>
+    }
+    @if (User.IsInRole("Admin")){
     <section class="gallery" id="AddCategory">
 
         @await Component.InvokeAsync("AddCategory")
     </section>
-
+    }
 <section class="call-to-action section bg-opacity" style="background-image: url('images/call-to-action.jpg');">
   <div class="container">
     <div class="row">

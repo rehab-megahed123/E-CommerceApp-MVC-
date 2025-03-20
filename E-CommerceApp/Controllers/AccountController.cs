@@ -70,7 +70,7 @@ namespace E_CommerceApp.Controllers
                     }
                     else
                     {
-                        roleResult = await Manager.AddToRoleAsync(user, "Buyer");
+                        roleResult = await Manager.AddToRoleAsync(user, "Seller");
                     }
 
                     if (roleResult.Succeeded)
@@ -121,11 +121,7 @@ namespace E_CommerceApp.Controllers
             }
             return View("Login", login);
         }
-        [AllowAnonymous, HttpGet("fotgot-password")]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
+          
 
         
 

@@ -6,32 +6,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Shopping Cart • E-Commerce</title>
+
+    <!-- إضافة CSS -->
     <style>
-        /* General Page Design */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f5f5;
+        /* Reset & Global Styles */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #b18161, #c68151, #fce1a1); /* ألوان أخف */
+        }
+
+        /* Cart Wrapper */
         .cart-container {
             width: 90%;
             max-width: 1000px;
-            margin: 50px auto;
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
         }
 
         h2 {
             font-size: 28px;
-            color: #232f3e;
-            text-align: center;
-            margin-bottom: 20px;
+            color: #f9a743; /* لون أفتح */
+            margin-bottom: 30px;
+            font-weight: bold;
         }
 
         /* Table Design */
@@ -80,18 +91,18 @@
             color: white;
         }
 
-        .btn-danger:hover {
-            background-color: #c0392b;
-        }
+            .btn-danger:hover {
+                background-color: #c0392b;
+            }
 
         .btn-primary {
             background-color: #28a745;
             color: white;
         }
 
-        .btn-primary:hover {
-            background-color: #218838;
-        }
+            .btn-primary:hover {
+                background-color: #218838;
+            }
 
         /* Total Section */
         .total-section {
@@ -119,50 +130,125 @@
         }
 
         /* Responsive Design */
-       
+        .btn {
+            padding: 10px 15px;
+            font-size: 14px;
+        }
 
-            .btn {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
+        .total-section {
+            font-size: 16px;
+        }
 
-            .total-section {
-                font-size: 16px;
-            }
+        /* Media Queries for Responsiveness */
+        media (max-width: 768px) {
+            body
+
+        {
+            height: auto;
+            padding: 20px 0;
+        }
+
+        .cart-container {
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        table {
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 10px;
+        }
+
+        .btn {
+            padding: 8px 14px;
+            font-size: 14px;
+        }
+
+        .total-section {
+            font-size: 14px;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+
+        .total-price {
+            font-size: 20px;
+        }
+
+        }
+
+        media (max-width: 480px) {
+            h2
+
+        {
+            font-size: 20px;
+        }
+
+        .total-price {
+            font-size: 18px;
+        }
+
+        .cart-container {
+            padding: 15px;
+        }
+
+        table {
+            font-size: 12px;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+
+        .btn {
+            padding: 6px 10px;
+            font-size: 12px;
+        }
+
+        .total-section {
+            font-size: 12px;
+        }
+
         }
     </style>
 </head>
 <body>
 
-<div class="cart-container">
-    <h2>Shopping Cart</h2>
+    <div class="cart-container">
+        <h2>Shopping Cart</h2>
 
-    @if (Model != null && Model.Any())
-    {
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+        @if (Model != null && Model.Any())
+        {
+            <table>
+                <thead>
                     <tr>
-                        <td>@item.ProductName</td>
-                        <td>@item.Price</td>
-                        <td>@item.Quantity</td>
-                        <td>@(item.Price * item.Quantity).ToString("C")</td>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price</td>
+                            <td>@item.Quantity</td>
+                            <td>@(item.Price * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-        <!-- Total Section -->
-        <div class="total-section">
+            <!-- Total Section -->
+            <div class="total-section">
                 <span>Total:</span><span class="total-price">@Model.Sum(item => item.Price * item.Quantity).ToString("C")</span>
             </div>
 

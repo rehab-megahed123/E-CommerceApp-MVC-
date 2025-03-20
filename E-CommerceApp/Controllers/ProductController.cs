@@ -1,6 +1,8 @@
 ﻿using E_commerce.DAl.Model;
 using E_Commerce.Bll.Manager.Abstraction;
 using E_CommerceApp.ViewModel;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -20,11 +22,13 @@ namespace E_CommerceApp.Controllers
         {
             return View("Products");
         }
+        
         public async Task< IActionResult> Details(int id)
         {
           var res= await ProductManager.GetByIdAsync(id);
             return View("Details",res);
         }
+        [Authorize(Roles = "Admin,Seller") ]
         [HttpPost]
         public  async Task<IActionResult> SaveAddProduct(AddProductVM product)
         {
@@ -103,12 +107,14 @@ namespace E_CommerceApp.Controllers
             return Content("This catigory not valid");
 
         }
+        [Authorize(Roles = "Admin,Seller")]
         public async Task< IActionResult> Update(AddProductVM product)
         {
             
             return View("Update",product);
 
         }
+        [Authorize(Roles = "Admin,Seller")]
         public async Task <IActionResult> SaveUpdateProduct(AddProductVM product)
         {
 
@@ -158,6 +164,7 @@ namespace E_CommerceApp.Controllers
 
 
         }
+        [Authorize(Roles = "Admin,Seller")]
         public async Task< IActionResult> Delete(AddProductVM product )
         {
             

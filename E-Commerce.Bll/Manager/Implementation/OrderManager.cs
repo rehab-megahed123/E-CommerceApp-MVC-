@@ -19,6 +19,13 @@ namespace E_Commerce.Bll.Manager.Implementation
         {
             _unitOfWork = unitOfWork;
         }
+
+        public async Task<List<Order>> Show()
+        {
+            var res = await _unitOfWork.Orders.GetAllAsync();
+            return res;
+        }
+
         public List<Order> ShowAll(string  userid)
         {
             var res=_unitOfWork.Orders.GetAllByUserId(userid);

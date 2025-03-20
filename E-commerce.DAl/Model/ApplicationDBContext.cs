@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using E_CommerceApp.Models;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +14,7 @@ namespace E_commerce.DAl.Model
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-        public DbSet<ResetPasswordToken> ResetPasswordTokens { get; set; }
+       
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }

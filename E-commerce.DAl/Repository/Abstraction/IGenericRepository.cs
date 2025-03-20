@@ -10,7 +10,7 @@ namespace E_commerce.DAl.Repository.Abstraction
 {
     public interface IGenericRepository<T> where T : class
     {
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<List<T>> GetAllAsync();
         Task<T> GetByIdAsync(int id);
         Task<T> GetByNameAsync(string name);
         Task<List<T>> GetByForeignKey(int id);

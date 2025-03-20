@@ -81,5 +81,17 @@ namespace E_CommerceApp.Controllers
             _context.SaveChanges();
             return RedirectToAction("ShowAll");
         }
+        [HttpPost]
+        public IActionResult CancleAll(Order order)
+        {
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+            return RedirectToAction("Show");
+        }
+        public async Task< IActionResult> Show()
+        {
+            var res = await OrderManager.Show();
+            return View(res);
+        }
     }
 }

@@ -15,12 +15,13 @@ namespace E_CommerceApp.Controllers
             RoleManager = roleManager;
 
         }
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AddRole()
         {
             var roles = await RoleManager.Roles.ToListAsync();
             return View("AddRole",roles);
         }
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> SaveRole(AddRoleVM role)
         {
             if (ModelState.IsValid)

@@ -1,0 +1,163 @@
+﻿@using E_commerce.DAl.Model
+@model List<E_commerce.DAl.Model.Order>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Orders List</h2>
+
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    @if ((User.IsInRole("Seller")) || (User.IsInRole("Admin")))
+                    {
+                        <th style="width: 25%;">User Id</th>
+                    }
+                    <th style="width: 25%;">Order Date</th>
+                    <th style="width: 20%;">Total Amount</th>
+                    <th style="width: 25%;">Order Status</th>
+                    <th style="width: 30%;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    <tr>
+                        @if ((User.IsInRole("Seller")) || (User.IsInRole("Admin")))
+                        {
+                            <td>@order.UserId</td>
+                        }
+                        <td>@order.OrderDate.ToString("MM/dd/yyyy")</td>
+                        <td>@order.TotalAmount.ToString("C")</td>
+                        <td>
+                            <span class="status-badge @GetStatusClass(order.Status)">
+                                @order.Status
+                            </span>
+                        </td>
+                        <td>
+                            @if (order.Status == OrderStatus.Pending)
+                            {
+                                <form method="post" action="@Url.Action("CancleAll", "Order")" style="display:inline;">
+                                    <input type="hidden" name="orderId" value="@order.OrderId" />
+                                    <button type="submit" class="btn btn-danger btn-sm">Cancel</button>
+                                </form>
+                            }
+                            else
+                            {
+                                <span class="text-muted">No actions available</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    /* تحسين عرض الصفحة */
+    .container {
+        max-width: 95%;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+
+    /* تحسين تصميم الجدول */
+    .table th, .table td {
+        vertical-align: middle;
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .status-badge {
+        padding: 8px 12px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+        min-width: 120px;
+        text-transform: capitalize;
+    }
+
+    /* الألوان الخاصة بحالات الطلب */
+    .pending {
+        background-color: #f39c12;
+        color: white;
+    }
+
+    .completed {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .canceled {
+        background-color: #e74c3c;
+        color: white;
+    }
+
+    /* تحسين شكل الأزرار */
+    .btn-sm {
+        padding: 8px 12px;
+        font-size: 14px;
+        margin: 2px;
+    }
+
+    /* تصميم متجاوب للأجهزة الصغيرة */
+    media (max-width: 768px) {
+        .container
+
+    {
+        padding: 15px;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .status-badge {
+        min-width: 100px;
+        font-size: 12px;
+    }
+
+    .btn-sm {
+        font-size: 12px;
+        padding: 6px 10px;
+    }
+
+    }
+
+    @@media (max-width: 480px) {
+        .table th, .table td
+
+    {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .status-badge {
+        min-width: 80px;
+        font-size: 12px;
+    }
+
+    .btn-sm {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+    }
+</style>
+
+@functions {
+    string GetStatusClass(OrderStatus status)
+    {
+        return status switch
+        {
+            OrderStatus.Pending => "pending",
+            OrderStatus.Completed => "completed",
+            OrderStatus.Canceled => "canceled",
+            _ => "text-dark"
+        };
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using E_commerce.DAl.Model;
 using E_Commerce.Bll.Manager.Abstraction;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_CommerceApp.Controllers
@@ -12,6 +13,7 @@ namespace E_CommerceApp.Controllers
             CategoryManager = categoryManager;
                
         }
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public IActionResult SaveAddCategory(Category category)
         {

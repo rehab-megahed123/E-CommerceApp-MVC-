@@ -10,5 +10,7 @@ namespace E_Commerce.Bll.Manager.Abstraction
   public  interface IOrderManager
     {
         public List<Order> ShowAll(string userId);
+        public Task<List<Order>> Show();
+
     }
 }
